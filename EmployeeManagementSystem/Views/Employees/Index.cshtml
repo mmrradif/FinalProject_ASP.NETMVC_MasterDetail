@@ -1,0 +1,62 @@
+﻿@model IEnumerable<EmployeeManagementSystem.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@foreach (var item in Model)
+{
+    <div class="row" style="box-shadow: rgb(100,100,90,0.40) 5px 5px 5px 5px; border-radius:20px; margin:10px;">
+
+        <div style="margin:15px; float:right;">
+            <a class="btn btn-primary btn-sm" href="@Url.Action("Edit", "Employees", new { id=item.EmployeeId})">Edit</a>
+            <a class="btn btn-danger btn-sm" href="@Url.Action("Delete", "Employees", new { id=item.EmployeeId})">Delete</a>
+        </div>
+
+        <div class="col-md-12 text-center" style="margin-bottom:5px;">
+
+            <div style="margin:10px;">
+                <img src="@item.Picture" width="100" class="img-rounded" />
+            </div>
+
+            <div style="margin-bottom:5px;">
+                @item.Name
+            </div>
+
+            <div style="margin-bottom:5px;">
+                @item.BirthDate.ToString("D")
+            </div>
+
+            <div style="margin-bottom:5px;">
+                @item.Age
+            </div>
+
+
+        </div>
+
+        <div class="col-md-offset-4 col-md-4">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-center">Skills</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var skill in item.employeeMasterTable)
+                    {
+                        <tr>
+                            <td>@skill.Skill.Type</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+}
